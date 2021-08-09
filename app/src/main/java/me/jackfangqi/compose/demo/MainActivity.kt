@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,15 +37,18 @@ class MainActivity : ComponentActivity() {
                     { MyBoxScreen() },
                     { PhotographerCard() },
                     {
-                        OpenComposeActivity {
+                        OpenAnotherActivity(text = "open ComposeActivity") {
                             startActivity(Intent(this, ComposeActivity::class.java))
+                        }
+                    },
+                    {
+                        OpenAnotherActivity(text = "open CustomLayoutActivity") {
+                            startActivity(Intent(this, CustomLayoutActivity::class.java))
                         }
                     }
                 )
             )
         }
-
-        registerForActivityResult()
     }
 }
 
@@ -128,9 +130,9 @@ fun ImageItem() {
 }
 
 @Composable
-fun OpenComposeActivity(onClick: () -> Unit) {
+fun OpenAnotherActivity(text: String, onClick: () -> Unit) {
     Button(onClick = onClick, modifier = Modifier.padding(8.dp)) {
-        Text(text = "open ComposeActivity")
+        Text(text = text)
     }
 }
 
@@ -170,10 +172,10 @@ fun Counter() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    PhotographerCard()
+//    PhotographerCard()
 //    MyBoxScreen()
-//    MyApp(
-//        title = "ComposeDemo",
-//        contents = listOf { Greeting(name = "Compose") }
-//    )
+    MyApp(
+        title = "ComposeDemo",
+        contents = listOf { Greeting(name = "Compose") }
+    )
 }

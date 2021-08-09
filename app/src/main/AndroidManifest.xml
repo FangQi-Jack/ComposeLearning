@@ -16,6 +16,10 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.ComposeDemo.NoActionBar" />
         <activity
+            android:name=".CustomLayoutActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ComposeDemo.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.ComposeDemo.NoActionBar">

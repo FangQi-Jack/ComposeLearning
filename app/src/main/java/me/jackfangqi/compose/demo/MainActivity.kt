@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,37 +30,34 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApp(
-                title = getString(R.string.app_name),
-                contents = listOf(
-                    { Greeting(name = "World") },
-                    { Counter() },
-                    { MyBoxScreen() },
-                    { PhotographerCard() },
-                    {
-                        OpenAnotherActivity(text = "open ComposeActivity") {
-                            startActivity(Intent(this, ComposeActivity::class.java))
-                        }
-                    },
-                    {
-                        OpenAnotherActivity(text = "open CustomLayoutActivity") {
-                            startActivity(Intent(this, CustomLayoutActivity::class.java))
-                        }
+            MyApp(contents = listOf(
+                { Greeting(name = "World") },
+                { Counter() },
+                { MyBoxScreen() },
+                { PhotographerCard() },
+                {
+                    OpenAnotherActivity(text = "open ComposeActivity") {
+                        startActivity(Intent(this, ComposeActivity::class.java))
                     }
-                )
-            )
+                },
+                {
+                    OpenAnotherActivity(text = "open CustomLayoutActivity") {
+                        startActivity(Intent(this, CustomLayoutActivity::class.java))
+                    }
+                }
+            ))
         }
     }
 }
 
 @Composable
-fun MyApp(title: String, contents: List<@Composable () -> Unit>) {
+fun MyApp(contents: List<@Composable () -> Unit>) {
     ComposeDemoTheme {
         // A surface container using the 'background' color from the theme
         Column {
             TopAppBar(
                 title = {
-                    Text(text = title)
+                    Text(text = LocalContext.current.getString(R.string.app_name))
                 }
             )
             Surface(color = MaterialTheme.colors.background) {
@@ -175,7 +173,6 @@ fun DefaultPreview() {
 //    PhotographerCard()
 //    MyBoxScreen()
     MyApp(
-        title = "ComposeDemo",
         contents = listOf { Greeting(name = "Compose") }
     )
 }

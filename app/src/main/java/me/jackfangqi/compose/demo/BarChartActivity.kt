@@ -31,7 +31,7 @@ class BarChartActivity : AppCompatActivity() {
 fun BarChartContent() {
     MaterialTheme {
         BarChartMinMax(
-            dataPoints = listOf(20, 15, 18, 25, 30),
+            dataPoints = listOf(20, 15, 18, 36, 25, 30, 10),
             maxText = { Text(text = "Max") },
             minText = { Text(text = "Min") },
             modifier = Modifier.padding(24.dp)

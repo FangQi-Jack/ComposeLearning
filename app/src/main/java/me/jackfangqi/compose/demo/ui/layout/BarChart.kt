@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.layout.HorizontalAlignmentLine
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
@@ -39,6 +40,9 @@ fun BarChart(
     var maxValueBaseline by remember { mutableStateOf(Float.MAX_VALUE) }
     var minValueBaseline by remember { mutableStateOf(Float.MIN_VALUE) }
 
+    var maxTopOffset by remember { mutableStateOf(Offset(0f, 0f)) }
+    var minTopOffset by remember { mutableStateOf(Offset(0f, 0f)) }
+
     Layout(
         content = {
             BoxWithConstraints(propagateMinConstraints = true) {
@@ -63,9 +67,11 @@ fun BarChart(
 
                             if (maxValueBaseline == Float.MAX_VALUE && dataPoint == maxDataPoint) {
                                 maxValueBaseline = topLeftOffset.y
+                                maxTopOffset = topLeftOffset
                             }
                             if (minValueBaseline == Float.MIN_VALUE && dataPoint == minDataPoint) {
                                 minValueBaseline = topLeftOffset.y
+                                minTopOffset = topLeftOffset
                             }
                         }
                         drawLine(
@@ -79,6 +85,24 @@ fun BarChart(
                             start = Offset(0f, maxHeight.toPx()),
                             end = Offset(maxWidth.toPx(), maxHeight.toPx()),
                             strokeWidth = 6f
+                        )
+                        drawLine(
+                            color = Color.Red,
+                            start = Offset(0f, maxTopOffset.y),
+                            end = Offset(maxTopOffset.x, maxTopOffset.y),
+                            strokeWidth = 6f,
+                            pathEffect = PathEffect.dashPathEffect(
+                                intervals = floatArrayOf(10f, 10f)
+                            )
+                        )
+                        drawLine(
+                            color = Color.Red,
+                            start = Offset(0f, minTopOffset.y),
+                            end = Offset(minTopOffset.x, minTopOffset.y),
+                            strokeWidth = 6f,
+                            pathEffect = PathEffect.dashPathEffect(
+                                intervals = floatArrayOf(10f, 10f)
+                            )
                         )
                     }
                 }
@@ -113,7 +137,7 @@ fun BarChartMinMax(
         content = {
             maxText()
             minText()
-            BarChart(dataPoints = dataPoints, modifier = Modifier.size(200.dp))
+            BarChart(dataPoints = dataPoints, modifier = Modifier.size(300.dp))
         },
         modifier = modifier
     ) { measureables, constraints ->

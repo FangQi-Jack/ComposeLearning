@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import me.jackfangqi.compose.demo.ui.theme.ComposeDemoTheme
 
@@ -117,6 +118,7 @@ fun PhotographerCard(modifier: Modifier = Modifier) {
     }
 }
 
+@ExperimentalCoilApi
 @Composable
 fun ImageItem() {
     Image(

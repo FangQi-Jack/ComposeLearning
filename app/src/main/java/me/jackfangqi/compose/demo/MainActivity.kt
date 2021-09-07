@@ -45,6 +45,11 @@ class MainActivity : ComponentActivity() {
                     OpenAnotherActivity(text = "open CustomLayoutActivity") {
                         startActivity(Intent(this, CustomLayoutActivity::class.java))
                     }
+                },
+                {
+                    OpenAnotherActivity(text = "open BarChartActivity") {
+                        startActivity(Intent(this, BarChartActivity::class.java))
+                    }
                 }
             ))
         }
